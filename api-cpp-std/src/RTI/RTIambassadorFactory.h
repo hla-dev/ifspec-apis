@@ -19,10 +19,10 @@ namespace rti1516e
    class RTIambassador;
 }
 
-namespace std
-{
-   template <class T> class auto_ptr;
-}
+// namespace std
+// {
+//    template <class T> class auto_ptr;
+// }
 
 #include <RTI/SpecificConfig.h>
 #include <RTI/Exception.h>
@@ -36,14 +36,12 @@ namespace rti1516e
    public:
       RTIambassadorFactory();
 
-      virtual ~RTIambassadorFactory()
-         throw ();
+      virtual ~RTIambassadorFactory() throw();
 
       // 10.35
-      std::auto_ptr< RTIambassador > createRTIambassador ()
-         throw (
-            RTIinternalError);
+      std::auto_ptr<RTIambassador> createRTIambassador() throw(
+          RTIinternalError);
    };
-}
+} // namespace rti1516e
 
 #endif // RTI_RTIambassadorFactory_h
