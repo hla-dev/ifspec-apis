@@ -21,10 +21,10 @@ namespace rti1516e
    class VariableLengthData;
 }
 
-namespace std
-{
-   template <class T> class auto_ptr;
-}
+// namespace std
+// {
+//    template <class T> class auto_ptr;
+// }
 
 #include <RTI/SpecificConfig.h>
 #include <RTI/Exception.h>
@@ -50,72 +50,58 @@ namespace rti1516e
    class RTI_EXPORT LogicalTimeFactory
    {
    public:
-      virtual ~LogicalTimeFactory ()
-         throw () = 0;
+      virtual ~LogicalTimeFactory() throw() = 0;
 
       // Return a LogicalTime with a value of "initial"
-      virtual std::auto_ptr< LogicalTime > makeInitial()
-         throw (
-            InternalError) = 0;
+      virtual std::auto_ptr<LogicalTime> makeInitial() throw(
+          InternalError) = 0;
 
       // Return a LogicalTime with a value of "final"
-      virtual std::auto_ptr< LogicalTime > makeFinal()
-         throw (
-            InternalError) = 0;
+      virtual std::auto_ptr<LogicalTime> makeFinal() throw(
+          InternalError) = 0;
 
       // Return a LogicalTimeInterval with a value of "zero"
-      virtual std::auto_ptr< LogicalTimeInterval > makeZero()
-         throw (
-            InternalError) = 0;
+      virtual std::auto_ptr<LogicalTimeInterval> makeZero() throw(
+          InternalError) = 0;
 
       // Return a LogicalTimeInterval with a value of "epsilon"
-      virtual std::auto_ptr< LogicalTimeInterval > makeEpsilon()
-         throw (
-            InternalError) = 0;
+      virtual std::auto_ptr<LogicalTimeInterval> makeEpsilon() throw(
+          InternalError) = 0;
 
       // LogicalTime decode from an encoded LogicalTime
-      virtual std::auto_ptr< LogicalTime > decodeLogicalTime (
-         VariableLengthData const & encodedLogicalTime)
-         throw (
-            InternalError,
-            CouldNotDecode) = 0;
+      virtual std::auto_ptr<LogicalTime> decodeLogicalTime(
+          VariableLengthData const &encodedLogicalTime) throw(InternalError,
+                                                              CouldNotDecode) = 0;
 
       // Alternate LogicalTime decode that reads directly from a buffer
-      virtual std::auto_ptr< LogicalTime > decodeLogicalTime (
-         void* buffer,
-         size_t bufferSize)
-         throw (
-            InternalError,
-            CouldNotDecode) = 0;
+      virtual std::auto_ptr<LogicalTime> decodeLogicalTime(
+          void *buffer,
+          size_t bufferSize) throw(InternalError,
+                                   CouldNotDecode) = 0;
 
       // LogicalTimeInterval decode from an encoded LogicalTimeInterval
-      virtual std::auto_ptr< LogicalTimeInterval > decodeLogicalTimeInterval (
-         VariableLengthData const & encodedValue)
-         throw (
-            InternalError,
-            CouldNotDecode) = 0;
+      virtual std::auto_ptr<LogicalTimeInterval> decodeLogicalTimeInterval(
+          VariableLengthData const &encodedValue) throw(InternalError,
+                                                        CouldNotDecode) = 0;
 
       // Alternate LogicalTimeInterval decode that reads directly from a buffer
-      virtual std::auto_ptr< LogicalTimeInterval > decodeLogicalTimeInterval (
-         void* buffer,
-         size_t bufferSize)
-         throw (
-            InternalError,
-            CouldNotDecode) = 0;
+      virtual std::auto_ptr<LogicalTimeInterval> decodeLogicalTimeInterval(
+          void *buffer,
+          size_t bufferSize) throw(InternalError,
+                                   CouldNotDecode) = 0;
 
       // Return the name of the logical time implementation
-      virtual std::wstring getName () const = 0;
+      virtual std::wstring getName() const = 0;
    };
 
    class RTI_EXPORT HLAlogicalTimeFactoryFactory
    {
    public:
-
       // Provides a factory for the standard logical time types HLAfloat64Time
       // and HLAinteger64Time. The RTI reference time library's
       // LogicalTimeFactoryFactory should just forward requests to here.
-      static std::auto_ptr< LogicalTimeFactory > makeLogicalTimeFactory (
-         std::wstring const & implementationName);
+      static std::auto_ptr<LogicalTimeFactory> makeLogicalTimeFactory(
+          std::wstring const &implementationName);
    };
 }
 
@@ -124,15 +110,14 @@ namespace rti1516e
    class RTI_EXPORT_FEDTIME LogicalTimeFactoryFactory
    {
    public:
-
       // The name is used to choose among several LogicalTimeFactories that might
       // be present in the fedtime library.  Each federation chooses its
       // implementation by passing the appropriate name to createFederationExecution.
       // If the supplied name is the empty string, a default LogicalTimeFactory is
       // returned.  If the supplied implementation name does not match any name
       // supported by the library, then a NULL pointer is returned.
-      static std::auto_ptr< LogicalTimeFactory > makeLogicalTimeFactory (
-         std::wstring const & implementationName);
+      static std::auto_ptr<LogicalTimeFactory> makeLogicalTimeFactory(
+          std::wstring const &implementationName);
    };
 }
 
