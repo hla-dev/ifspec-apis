@@ -1,11 +1,13 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
 
-cc_library(
+cc_binary(
     name = "main",
     srcs = glob([
         "src/*.cpp",
         "src/*.hpp",
     ]),
-    visibility = ["//visibility:public"],
-    deps = ["//api-cpp-std:main"],
+    deps = [
+        "//api-cpp-std:main",
+        "//impl-cpp-null:main",
+    ],
 )
